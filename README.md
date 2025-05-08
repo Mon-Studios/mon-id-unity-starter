@@ -1,12 +1,12 @@
+Unity version: 2022.3.47f1
+
 This project serves as a testing ground for the Mon ID X Thirdweb Authentication Flow.
 
 This project utilizes Thirdweb Unity SDK sample and modified to requirement.
 
-The token is retrived using Thirdweb IWallet Autheciate method and doesn't require the manual payload generation.
+The token is retrived usingIThirdwebWallet.Authenticate method and doesn't require the manual payload generation.
 ![image](https://github.com/user-attachments/assets/56127f0e-adb7-4ece-97d9-fbee7a63f1f0)
 
-
-Unity version: 2022.3.47f1
 
 1. Go to Scene_Playground
 2. Check the settings at ThirdwebManager for the client id and bundle id
