@@ -1,45 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.Networking;
-using Newtonsoft.Json;
-using BestHTTP;
-using System;
+
 using Services.ApiService.Core;
-public class LoginController : MonoBehaviour
+using System.Threading.Tasks;
+using System;
+namespace Thirdweb.Unity.Examples
 {
-    public ApiCaller apiCaller;
-
-    private void Awake()
+    public class LoginController : MonoBehaviour
     {
-        apiCaller = new ApiCaller();
-        ApiService.Initialise();
-    }
+        private ApiCaller apiCaller;
 
-    public string JwtFromMonId;
+        public string JwtFromMonId;
 
 
-    [ContextMenu("Send Request")]
-    public void SendWebRequest()
-    {
-        var args = new LoginApiCall.Arguments() { Source = "monid", JWTFromMon = JwtFromMonId, Game = "pixelmon-tcg" };
+        private void Awake()
+        {
+            apiCaller = new ApiCaller();
+            ApiService.Initialise();
+        }
 
-        apiCaller.MakeApiCall<LoginApiCall, LoginApiCall.Arguments, LoginApiCall.LoginResponse>(args, OnSuccess, OnFail);
+        [ContextMenu("Send Request")]
+        public void SendWebRequest()
+        {
+            var args = new LoginApiCall.Arguments() { Source = "monid", JWTFromMon = JwtFromMonId, Game = "pixelmon-tcg" };
 
-            
-    }
+            apiCaller.MakeApiCall<LoginApiCall, LoginApiCall.Arguments, LoginApiCall.LoginResponse>(args, OnSuccess, OnFail);
+        }
 
-    private void OnFail()
-    {
-        Debug.Log("Failed to login");
-    }
+        public async Task<LoginApiCall.LoginResponse> SendWebRequestAsync()
+        {
+            var args = new LoginApiCall.Arguments()
+            {
+                Source = "monid",
+                JWTFromMon = JwtFromMonId,
+                Game = "pixelmon-tcg"
+            };
 
-    private void OnSuccess(LoginApiCall.LoginResponse response)
-    {
-        Debug.Log(response.user_id);
-        Debug.Log(response.access_token);
+            var tcs = new TaskCompletionSource<LoginApiCall.LoginResponse>();
+
+            void OnSuccess(LoginApiCall.LoginResponse response)
+            {
+                tcs.TrySetResult(response);
+            }
+
+            void OnFail()
+            {
+                Debug.Log("fail");
+            }
+
+            apiCaller.MakeApiCall<LoginApiCall, LoginApiCall.Arguments, LoginApiCall.LoginResponse>(
+                args, OnSuccess, OnFail
+            );
+
+
+            return await tcs.Task;
+        }
+
+        private void OnFail()
+        {
+            Debug.Log("Failed to login");
+        }
+
+        private void OnSuccess(LoginApiCall.LoginResponse response)
+        {
+            Debug.Log(response.user_id);
+            Debug.Log(response.access_token);
+        }
     }
 }
+
 
 
 

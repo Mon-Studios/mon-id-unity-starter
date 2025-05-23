@@ -2988,6 +2988,7 @@ GameObject:
   m_Component:
   - component: {fileID: 307839109}
   - component: {fileID: 307839110}
+  - component: {fileID: 307839111}
   m_Layer: 0
   m_Name: PlaygroundManager
   m_TagString: Untagged
@@ -3132,6 +3133,19 @@ MonoBehaviour:
     LogText: {fileID: 944447571}
     InputField: {fileID: 0}
     InputFieldSubmitButton: {fileID: 0}
+--- !u!114 &307839111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307839108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d337ddc8421894385f24c21d1c96f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JwtFromMonId: 
 --- !u!1 &411760777
 GameObject:
   m_ObjectHideFlags: 0

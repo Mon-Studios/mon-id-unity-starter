@@ -21,9 +21,7 @@ public class LoginApiCall : IApiCallWithArgs
             
         };
 
-        Debug.Log(config.RawBody);
-        //!could be better
-        ApiService.Send("http://alb-game-platform-staging-334536562.ap-southeast-1.elb.amazonaws.com/v1/users/login", config, callbacks, "GuestLogin", retryAttempts);
+        ApiService.Send("http://alb-game-platform-staging-334536562.ap-southeast-1.elb.amazonaws.com/v1/users/login", config, callbacks, "Login", retryAttempts);
     }
 
     public void SetArgs<T>(T args)

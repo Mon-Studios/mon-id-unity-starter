@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using TMPro;
@@ -24,6 +25,8 @@ namespace Thirdweb.Unity.Examples
 
     public class PlaygroundManager : MonoBehaviour
     {
+        public LoginController LoginController;
+        
         [Header("Mon ID Settings")]
         [SerializeField]
         private string _authDomainPath;
@@ -130,7 +133,7 @@ namespace Thirdweb.Unity.Examples
             currentPanel.BackButton.onClick.AddListener(InitializePanels);
 
             currentPanel.NextButton.onClick.RemoveAllListeners();
-            currentPanel.NextButton.onClick.AddListener(InitializeContractsPanel);
+            currentPanel.NextButton.onClick.AddListener(InitializeMonFunctionPanel);
 
             currentPanel.Action1Button.onClick.RemoveAllListeners();
             currentPanel.Action1Button.onClick.AddListener(async () =>
@@ -157,20 +160,7 @@ namespace Thirdweb.Unity.Examples
                 Log(currentPanel.LogText, $"Balance: {balanceEth} {_chainDetails.NativeCurrency.Symbol}");
             });
 
-            currentPanel.Action4Button.onClick.RemoveAllListeners();
-            currentPanel.Action4Button.onClick.AddListener(async () =>
-            {
-                LoadingLog(currentPanel.LogText);
-
-               
-
-                var authResult = await wallet.Authenticate<string>(domain: _authDomainPath, chainId: ActiveChainId,
-                    authPayloadPath: _authLoadPath,
-                    authLoginPath: _authLoadPath, separatePayloadAndSignatureInBody: true);
-
-                Log(currentPanel.LogText, $"JWT: {authResult}");
-
-            });
+           
 
         }
 
@@ -422,6 +412,46 @@ namespace Thirdweb.Unity.Examples
             });
         }
 
+        private async void InitializeMonFunctionPanel()
+        {
+            var panel = WalletPanels.Find(walletPanel => walletPanel.Identifier == "EcosystemWallet_MonFunction");
+            var currentWallet = ThirdwebManager.Instance.GetActiveWallet();
+
+            CloseAllPanels();
+            ClearLog(panel.LogText);
+            panel.Panel.SetActive(true);
+
+            panel.Action1Button.onClick.RemoveAllListeners();
+            panel.Action1Button.onClick.AddListener(async () =>
+            {       
+                LoadingLog(panel.LogText);
+
+     
+                var authResult = await currentWallet.Authenticate<MonJWTPayload>(domain: _authDomainPath, chainId: ActiveChainId,
+                    authPayloadPath: _authLoadPath,
+                    authLoginPath: _authLoadPath, separatePayloadAndSignatureInBody: true);
+
+                Log(panel.LogText, $"JWT: {authResult.token}");
+                LoginController.JwtFromMonId = authResult.token;
+  
+            });
+
+            panel.Action2Button.onClick.RemoveAllListeners();
+            panel.Action2Button.onClick.AddListener(async () =>
+            {
+                try
+                {
+                    var reponse = await LoginController.SendWebRequestAsync();
+                    Log(panel.LogText, JsonConvert.SerializeObject(reponse));
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError("Login failed: " + ex.Message);
+                }
+
+            });
+        }
+
         private async void InitializeAccountAbstractionPanel()
         {
             var currentWallet = ThirdwebManager.Instance.GetActiveWallet();
@@ -521,5 +551,10 @@ namespace Thirdweb.Unity.Examples
         {
             logText.text = "Loading...";
         }
+    }
+
+    public class MonJWTPayload
+    {
+        public string token;
     }
 }
