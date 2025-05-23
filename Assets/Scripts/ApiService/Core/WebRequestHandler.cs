@@ -75,7 +75,7 @@ namespace Services.ApiService.Core
                         Debug.Log("LOG :" + request.Response.DataAsText);
                         if (response.IsSuccess)
                         {
-                            if (config.IsDebugFullDescription)
+                            if (config != null && config.IsDebugFullDescription)
                             {
                                 Debug.Log($"{description}  Response url = {url} " +
                                 $" response: {request.Response.DataAsText}");
@@ -110,7 +110,7 @@ namespace Services.ApiService.Core
                         {
                             try
                             {
-                                if (config.IsDebugFullDescription)
+                                if (config != null && config.IsDebugFullDescription)
                                 {
                                     Debug.LogWarning($"Description = {description} \nRequest finished Successfully, but the server sent an error.\n" +
                                     $"Status Code: {request.Response.StatusCode}  Message: {request.Response.Message}  DataAsText: {request.Response.DataAsText}");
