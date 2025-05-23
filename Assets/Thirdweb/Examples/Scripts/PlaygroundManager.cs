@@ -109,6 +109,8 @@ namespace Thirdweb.Unity.Examples
             });
         }
 
+
+     
         private async void ConnectWallet(WalletOptions options)
         {
             // Connect the wallet
@@ -120,6 +122,8 @@ namespace Thirdweb.Unity.Examples
 
             var wallet = await ThirdwebManager.Instance.ConnectWallet(options);
 
+
+            
             // Initialize the wallet panel
 
             CloseAllPanels();
@@ -127,6 +131,9 @@ namespace Thirdweb.Unity.Examples
             // Setup actions
 
             ClearLog(currentPanel.LogText);
+            InitializeMonFunctionPanel();
+
+            return;
             currentPanel.Panel.SetActive(true);
 
             currentPanel.BackButton.onClick.RemoveAllListeners();
@@ -414,6 +421,8 @@ namespace Thirdweb.Unity.Examples
 
         private async void InitializeMonFunctionPanel()
         {
+
+            
             var panel = WalletPanels.Find(walletPanel => walletPanel.Identifier == "EcosystemWallet_MonFunction");
             var currentWallet = ThirdwebManager.Instance.GetActiveWallet();
 
@@ -422,34 +431,68 @@ namespace Thirdweb.Unity.Examples
             panel.Panel.SetActive(true);
 
             panel.Action1Button.onClick.RemoveAllListeners();
-            panel.Action1Button.onClick.AddListener(async () =>
-            {       
-                LoadingLog(panel.LogText);
+            panel.Action2Button.onClick.RemoveAllListeners();
+            panel.Action3Button.onClick.RemoveAllListeners();
 
-     
-                var authResult = await currentWallet.Authenticate<MonJWTPayload>(domain: _authDomainPath, chainId: ActiveChainId,
-                    authPayloadPath: _authLoadPath,
-                    authLoginPath: _authLoadPath, separatePayloadAndSignatureInBody: true);
 
-                Log(panel.LogText, $"JWT: {authResult.token}");
-                LoginController.JwtFromMonId = authResult.token;
-  
+            panel.Action1Button.onClick.AddListener(() =>
+            {
+                GetAddress();
+
+            });
+            panel.Action2Button.onClick.AddListener(()=>
+            {
+                GetJWT();
+
             });
 
-            panel.Action2Button.onClick.RemoveAllListeners();
-            panel.Action2Button.onClick.AddListener(async () =>
+            panel.Action3Button.onClick.AddListener(() =>
+            {
+                GetAuthsphere();
+
+            });
+
+            async void GetAddress()
+            {
+                LoadingLog(panel.InputField);
+
+                var address = await currentWallet.GetAddress();
+                Log(panel.InputField, address);
+
+            }
+
+            async void GetAuthsphere()
             {
                 try
                 {
+                    LoadingLog(panel.InputField);
+
+                    if(string.IsNullOrEmpty(LoginController.JwtFromMonId))
+                    {
+                        Log(panel.InputField, "Press Get Mon JWT first");
+                        return;
+                    }
                     var reponse = await LoginController.SendWebRequestAsync();
-                    Log(panel.LogText, JsonConvert.SerializeObject(reponse));
+                    Log(panel.InputField, JsonConvert.SerializeObject(reponse, Formatting.Indented));
                 }
                 catch (Exception ex)
                 {
                     Debug.LogError("Login failed: " + ex.Message);
                 }
+            }
+            async void GetJWT()
+            {
+                LoadingLog(panel.InputField);
 
-            });
+
+                var authResult = await currentWallet.Authenticate<MonJWTPayload>(domain: _authDomainPath, chainId: ActiveChainId,
+                    authPayloadPath: _authLoadPath,
+                    authLoginPath: _authLoadPath, separatePayloadAndSignatureInBody: true);
+
+
+                Log(panel.InputField, $"JWT: {authResult.token}");
+                LoginController.JwtFromMonId = authResult.token;
+            }
         }
 
         private async void InitializeAccountAbstractionPanel()
@@ -547,7 +590,18 @@ namespace Thirdweb.Unity.Examples
             ThirdwebDebug.Log(message);
         }
 
+        private void Log(TMP_InputField logText, string message)
+        {
+            logText.text = message;
+            ThirdwebDebug.Log(message);
+        }
+
         private void LoadingLog(TMP_Text logText)
+        {
+            logText.text = "Loading...";
+        }
+
+        private void LoadingLog(TMP_InputField logText)
         {
             logText.text = "Loading...";
         }
