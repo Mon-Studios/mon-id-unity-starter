@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/d0f3082b-512c-40ce-b547-8060ad3c82f0)Unity version: 2022.3.47f1
+Unity version: 2022.3.47f1
 
 This project serves as a testing ground for the Mon ID X Thirdweb Authentication Flow.
 
