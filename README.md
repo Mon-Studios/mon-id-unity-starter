@@ -29,19 +29,25 @@ The token is retrived usingIThirdwebWallet.Authenticate method and doesn't requi
 
 6. Select your desired login method.
 
-![image](https://github.com/user-attachments/assets/cef722cd-5d55-4f5f-a55b-891d79b4ced6)
+![image](https://github.com/user-attachments/assets/b6a2a06e-78ca-4536-8724-10d2d90761d0)
 
 7. Sign in.
 
 ![image](https://github.com/user-attachments/assets/54bb2795-7a6c-4237-807e-04a2cbed9c7b)
 
-8. Click the Get Mon JWT and you should be able to get the token. 
+8. Click the Get Address to get your current wallet address
+![image](https://github.com/user-attachments/assets/802ead85-b618-42ec-942e-c9b66efc0ddc)
 
-![image](https://github.com/user-attachments/assets/df5f6a97-845e-46e9-b877-223c5fc0336f)
+9. Click Get Mon JWT for the JWT
+![image](https://github.com/user-attachments/assets/7dace40c-2faa-419b-882e-3fe22c5c7cac)
 
-9. Token would be logged in console as well and able to be selected for your usage.
+10. Click Get Authsphere to details after successful login 
+![image](https://github.com/user-attachments/assets/4be17c73-a68f-43ba-8f5d-0e21f5f94542)
 
-![image](https://github.com/user-attachments/assets/98a05539-1386-4928-99ea-eccb63e6fb0d)
+
+
+
+
 
 
 
