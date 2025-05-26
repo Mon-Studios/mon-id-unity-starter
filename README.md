@@ -1,4 +1,4 @@
-Unity version: 2022.3.47f1
+![image](https://github.com/user-attachments/assets/d0f3082b-512c-40ce-b547-8060ad3c82f0)Unity version: 2022.3.47f1
 
 This project serves as a testing ground for the Mon ID X Thirdweb Authentication Flow.
 
@@ -43,6 +43,10 @@ The token is retrived usingIThirdwebWallet.Authenticate method and doesn't requi
 
 10. Click Get Authsphere to details after successful login 
 ![image](https://github.com/user-attachments/assets/4be17c73-a68f-43ba-8f5d-0e21f5f94542)
+
+11. Details here are selectable
+![image](https://github.com/user-attachments/assets/6d18dc3b-2ca0-4cff-a729-f6df5d174567)
+
 
 
 
