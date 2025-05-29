@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Set your bundle id here -->
                 <!-- Replace 'com.thirdweb.unitysdk' with your desired scheme -->
-                <data android:scheme="com.thirdweb.unitysdk" />
+                <data android:scheme="id.mon.localhost" />
             </intent-filter>
 
             <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
