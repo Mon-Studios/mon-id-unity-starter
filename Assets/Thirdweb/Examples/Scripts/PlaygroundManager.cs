@@ -123,7 +123,7 @@ namespace Thirdweb.Unity.Examples
             var wallet = await ThirdwebManager.Instance.ConnectWallet(options);
 
 
-            
+            Debug.Log(wallet is SmartWallet);
             // Initialize the wallet panel
 
             CloseAllPanels();
@@ -241,8 +241,10 @@ namespace Thirdweb.Unity.Examples
                 try
                 {
                     var email = panel.InputField.text;
+                    var walletOption = new SmartWalletOptions(sponsorGas: true);
+
                     var ecosystemWalletOptions = new EcosystemWalletOptions(ecosystemId: _ecosystemId, email: email, ecosystemPartnerId: _partnerId);
-                    var options = new WalletOptions(provider: WalletProvider.EcosystemWallet, chainId: ActiveChainId, ecosystemWalletOptions: ecosystemWalletOptions);
+                    var options = new WalletOptions(provider: WalletProvider.EcosystemWallet, chainId: ActiveChainId, smartWalletOptions: walletOption, ecosystemWalletOptions: ecosystemWalletOptions);
                     ConnectWallet(options);
                 }
                 catch (System.Exception e)
@@ -301,8 +303,10 @@ namespace Thirdweb.Unity.Examples
                 try
                 {
                     Log(panel.LogText, "Authenticating...");
+                    var walletOption = new SmartWalletOptions(sponsorGas: true);
+
                     var ecosystemWalletOptions = new EcosystemWalletOptions(ecosystemId: _ecosystemId, authprovider: AuthProvider.Google, ecosystemPartnerId: _partnerId);
-                    var options = new WalletOptions(provider: WalletProvider.EcosystemWallet, chainId: ActiveChainId, ecosystemWalletOptions: ecosystemWalletOptions);
+                    var options = new WalletOptions(provider: WalletProvider.EcosystemWallet, chainId: ActiveChainId, smartWalletOptions: walletOption, ecosystemWalletOptions: ecosystemWalletOptions);
                     ConnectWallet(options);
                 }
                 catch (System.Exception e)
@@ -317,8 +321,10 @@ namespace Thirdweb.Unity.Examples
                 try
                 {
                     Log(panel.LogText, "Authenticating...");
+                    var walletOption = new SmartWalletOptions(sponsorGas: true);
+
                     var ecosystemWalletOptions = new EcosystemWalletOptions(ecosystemId: _ecosystemId, authprovider: AuthProvider.Apple, ecosystemPartnerId: _partnerId);
-                    var options = new WalletOptions(provider: WalletProvider.EcosystemWallet, chainId: ActiveChainId, ecosystemWalletOptions: ecosystemWalletOptions);
+                    var options = new WalletOptions(provider: WalletProvider.EcosystemWallet, chainId: ActiveChainId, smartWalletOptions: walletOption, ecosystemWalletOptions: ecosystemWalletOptions);
                     ConnectWallet(options);
                 }
                 catch (System.Exception e)
@@ -333,8 +339,10 @@ namespace Thirdweb.Unity.Examples
                 try
                 {
                     Log(panel.LogText, "Authenticating...");
+                    var walletOption = new SmartWalletOptions(sponsorGas: true);
+
                     var ecosystemWalletOptions = new EcosystemWalletOptions(ecosystemId: _ecosystemId, authprovider: AuthProvider.Discord, ecosystemPartnerId: _partnerId);
-                    var options = new WalletOptions(provider: WalletProvider.EcosystemWallet, chainId: ActiveChainId, ecosystemWalletOptions: ecosystemWalletOptions);
+                    var options = new WalletOptions(provider: WalletProvider.EcosystemWallet, chainId: ActiveChainId, smartWalletOptions: walletOption,ecosystemWalletOptions: ecosystemWalletOptions);
                     ConnectWallet(options);
                 }
                 catch (System.Exception e)
