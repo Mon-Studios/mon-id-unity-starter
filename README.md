@@ -15,11 +15,12 @@ The token is retrived usingIThirdwebWallet.Authenticate method and doesn't requi
 
 2. Check the settings at ThirdwebManager for the client id and bundle id
 
-![image](https://github.com/user-attachments/assets/07b90e81-1ae0-4008-9cc5-327c39c68a64)
+<img width="1064" height="466" alt="image" src="https://github.com/user-attachments/assets/fb87f05a-dc51-40ed-9bdb-1f32ec76a92a" />
 
 3. Check the settings at the PlaygroundManager for the ecosystem id, partner id etc
 
-![image](https://github.com/user-attachments/assets/dcfe8c9d-c83c-48cc-9613-8b53c84abe56)
+<img width="1098" height="532" alt="image" src="https://github.com/user-attachments/assets/f146ff72-0cbf-4b26-8a89-2429ab77b4c7" />
+
 
 4. Play the project.
 
